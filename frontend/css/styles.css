@@ -7,6 +7,8 @@ body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.4 Inter,syst
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--surf);z-index:30}
 button,input,select{font:inherit;color:inherit}
 svg{width:1em;height:1em;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+svg path,svg rect,svg circle{fill:none}
+nav button[aria-current=page] svg path{fill:currentColor}
 header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--surf);box-shadow:0 1px 8px rgba(40,30,110,.08)}
 .bar{max-width:1440px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;gap:24px;min-height:74px}
 .logo{display:flex;align-items:center;gap:12px;font-weight:700;font-size:30px;letter-spacing:-.02em;color:var(--ink);text-decoration:none;margin-right:auto}
@@ -29,12 +31,14 @@ main{max-width:1440px;margin:0 auto;padding:24px 24px 48px}
 .hero .btn{background:#5a35e8;padding:16px 30px;font-size:20px;border-radius:12px;box-shadow:0 6px 18px rgba(30,10,120,.4)}
 .btn svg{font-size:1.15em}
 .filters{display:grid;grid-template-columns:1fr 275px 290px;gap:24px;margin:30px 0 0}
-.field{position:relative;display:flex;align-items:center;background:var(--surf);border:1px solid var(--line);border-radius:12px;height:54px;padding:0 20px;gap:14px;color:var(--mute)}
-.field svg{font-size:23px}
-.field input,.field select{flex:1;min-width:0;border:0;background:none;outline:0;height:100%;font-size:18px;color:var(--ink);appearance:none;-webkit-appearance:none;cursor:pointer}
-.field input{cursor:text}.field input::placeholder{color:var(--mute)}
+.field{position:relative;display:flex;align-items:center;background:var(--surf);border:1px solid var(--line);border-radius:12px;height:54px;padding:0 18px;gap:14px;color:var(--mute);overflow:hidden}
+.field svg{font-size:23px;flex:none}
+.field input,.field select{flex:1;min-width:0;border:0;background:transparent;outline:0;font-size:18px;color:var(--ink);appearance:none!important;-webkit-appearance:none!important;-moz-appearance:none!important;background-image:none!important;cursor:pointer;padding:0;margin:0}
+.field input{height:100%;cursor:text}.field input::placeholder{color:var(--mute)}
+.field select{line-height:1.35;padding:13px 0;text-overflow:ellipsis;clip-path:inset(0 30px 0 0)}
+.field select::-ms-expand,.field select::picker-icon{display:none!important}
 .field select option{color:#000}
-.field .ch{position:absolute;right:18px;pointer-events:none;font-size:20px;color:var(--ink)}
+.field .ch{position:absolute;right:18px;top:50%;transform:translateY(-50%);pointer-events:none;font-size:20px;color:var(--ink)}
 .field:focus-within,.btn:focus-visible,nav button:focus-visible,.card button:focus-visible{outline:2px solid var(--p);outline-offset:2px}
 .head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:34px 0 24px}
 .head h2{margin:0;font-size:clamp(26px,3vw,34px);font-weight:700;letter-spacing:-.01em}
