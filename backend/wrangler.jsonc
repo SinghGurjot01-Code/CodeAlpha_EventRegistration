@@ -13,14 +13,14 @@
     {
       "binding": "DB",
       "database_name": "codealpha-eventhub-db",
-      // Placeholder ID for local D1 (--local). Replace with real database_id after `wrangler d1 create`.
-      "database_id": "00000000-0000-0000-0000-000000000000",
+      // Real D1 database ID (an identifier, not a secret). Local dev (--local) uses .wrangler/.
+      "database_id": "0aa960ef-ca6a-49d2-ac0b-b51b1a6615c9",
       "migrations_dir": "migrations"
     }
   ],
 
   "vars": {
-    "CORS_ORIGIN": "",
+    "CORS_ORIGIN": "https://ca-eventhub.vercel.app",
     "SESSION_TTL_HOURS": "168"
   },
 

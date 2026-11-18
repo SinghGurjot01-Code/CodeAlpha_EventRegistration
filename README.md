@@ -1,5 +1,9 @@
 # CodeAlpha Task 2 — EventHub (Event Registration System)
 
+**Live Application (Vercel):** <https://ca-eventhub.vercel.app>  
+**Backend API (Cloudflare Workers + D1):** <https://codealpha-eventhub.singhgurjotpal84.workers.dev>  
+**GitHub Repository:** <https://github.com/SinghGurjot01-Code/CodeAlpha_EventRegistration>
+
 A full-stack **Event Registration System** built for the **CodeAlpha Backend Development Internship — Task 2**.  
 EventHub connects the existing responsive purple-and-white frontend (`eventhub.html`) to a production-grade **Node.js + Express.js** backend running on **Cloudflare Workers** (`nodejs_compat` + `httpServerHandler`) with **Cloudflare D1** (SQLite-compatible relational database).
 
@@ -311,12 +315,15 @@ Frontend configuration lives in [`frontend/js/config.js`](frontend/js/config.js)
 
 ## 11. Deployment Instructions (Vercel + Cloudflare Workers & D1)
 
+- **Vercel (`https://ca-eventhub.vercel.app`)** hosts the frontend static assets and proxies `/api/:path*` via [`frontend/vercel.json`](frontend/vercel.json) directly to the Cloudflare Worker (`https://codealpha-eventhub.singhgurjotpal84.workers.dev/api/:path*`).
+- **Cloudflare Workers + D1 (`https://codealpha-eventhub.singhgurjotpal84.workers.dev`)** runs the Express.js API and persists users, events, and registrations in the remote D1 database `codealpha-eventhub-db` (`0aa960ef-ca6a-49d2-ac0b-b51b1a6615c9`).
+
 ```bash
 # 1. Create and migrate the remote Cloudflare D1 database
 cd backend
 npx wrangler login
 npx wrangler d1 create codealpha-eventhub-db
-# Copy the returned database_id into backend/wrangler.jsonc -> d1_databases[0].database_id
+# Ensure database_id is set in backend/wrangler.jsonc -> d1_databases[0].database_id
 npm run db:migrate:remote
 
 # 2. Set the production JWT secret and deploy the Express Worker
@@ -325,7 +332,7 @@ npm run deploy
 
 # 3. Deploy the frontend to Vercel
 cd ../frontend
-vercel deploy --prod
+vercel deploy --prod --name ca-eventhub
 ```
 
 ---
